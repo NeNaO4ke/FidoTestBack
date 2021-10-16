@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        var token = {};
+    </script>
+</head>
+<body>
+USER
+<form
+        onsubmit="
+        const data = {username: this.username.value, password: this.password.value, email: this.email.value};
+    var payload = {
+        method: 'post',
+        headers: {
+            'Content-type': 'application/json'
+        },
+       body: JSON.stringify(data)
+    };
+    fetch('/addUser', payload).then(resp => console.log(resp));
+    return false;
+"
+>
+    name
+    <input type="text" name="username">
+    pass
+    <input type="password" name="password">
+    email
+    <input type="text" name="email">
+    <input type="submit" value="Sign in">
+</form>
+<div></div>
+<form  onsubmit="
+        const data = {email: this.email.value};
+    var payload = {
+        method: 'delete',
+    };
+    fetch('/deleteUser/'+ this.email.value,payload).then(resp => console.log(resp));
+    return false;
+">
+    <input type="text" name="email">Delete
+</form>
+ROOM
+<form
+        onsubmit="
+        const data = {name: this.name.value, location: this.location.value, capacity: this.capacity.value};
+    var payload = {
+        method: 'post',
+        headers: {
+            'Content-type': 'application/json'
+        },
+       body: JSON.stringify(data)
+    };
+    fetch('/addRoom', payload).then(resp => console.log(resp));
+    return false;
+"
+>
+    name
+    <input type="text" name="name">
+    loca
+    <input type="text" name="location">
+    capacity
+    <input type="text" name="capacity">
+    <input type="submit" value="Sign in">
+</form>
+<div></div>
+<form  onsubmit="
+        const data = {name: this.name.value};
+    var payload = {
+        method: 'delete',
+    };
+    fetch('/deleteRoom/'+ this.roomname.value,payload).then(resp => console.log(resp));
+    return false;
+">
+    <input type="text" name="roomname">Delete
+</form>
+<div></div>
+BOOKING
+<form
+        onsubmit="
+        const data = {name: this.roomname.value, start: new Date(this.start.value), end: new Date(this.end.value)};
+    var payload = {
+        method: 'get',
+    };
+    fetch('/booking?name='+this.roomname.value+'&start='+data.start.getTime()+'&end='+data.end.getTime(), payload).then(resp => console.log(resp));
+    return false;
+"
+>
+    name
+    <input type="text" name="roomname">
+    start
+    <input type="date" name="start">
+    end
+    <input type="date" name="end">
+    <input type="submit" value="Sign in">
+</form>
+<div></div>
+<form
+        onsubmit="
+        const data = {name: this.roomname.value, start: new Date(this.start.value).getTime(), end: new Date(this.end.value).getTime()};
+    var payload = {
+         method: 'post',
+        headers: {
+            'Content-type': 'application/json'
+        },
+       body: JSON.stringify(data)
+    };
+    fetch('/booking', payload).then(resp => console.log(resp));
+    return false;
+"
+>
+    name
+    <input type="text" name="roomname">
+    start
+    <input type="date" name="start">
+    end
+    <input type="date" name="end">
+    <input type="submit" value="Sign in">
+</form>
+<div></div>
+</body>
+</html>
